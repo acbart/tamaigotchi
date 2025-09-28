@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamaigotchi - Self-Evolving Pet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tamaigotchi</h1>
+        <div class="tamagotchi-screen" id="tamagotchi-screen">
+            <div class="tamagotchi-display" id="tamagotchi-display">
+                <!-- Tamagotchi will be rendered here -->
+            </div>
+        </div>
+        <div class="status-panel">
+            <div class="needs">
+                <div class="need">
+                    <span>Hunger:</span>
+                    <div class="bar"><div class="fill" id="hunger-bar"></div></div>
+                    <span id="hunger-value">50</span>
+                </div>
+                <div class="need">
+                    <span>Happiness:</span>
+                    <div class="bar"><div class="fill" id="happiness-bar"></div></div>
+                    <span id="happiness-value">50</span>
+                </div>
+                <div class="need">
+                    <span>Energy:</span>
+                    <div class="bar"><div class="fill" id="energy-bar"></div></div>
+                    <span id="energy-value">50</span>
+                </div>
+            </div>
+            <div class="log" id="log">
+                <h3>Activity Log</h3>
+                <div class="log-entries" id="log-entries">
+                    <p>Tamaigotchi initialized...</p>
+                </div>
+            </div>
+        </div>
+        <div class="api-status">
+            <span>Next AI Evolution: <span id="countdown">5:00</span></span>
+            <div class="api-config">
+                <input type="password" id="api-key" placeholder="OpenAI API Key (optional)" />
+                <button onclick="setApiKey()" id="set-key-btn">Set Key</button>
+            </div>
+        </div>
+    </div>
+    <script src="api.js"></script>
+    <script src="tamagotchi.js"></script>
+    <script>
+        function setApiKey() {
+            const apiKey = document.getElementById('api-key').value;
+            if (apiKey && tamagotchi.openAI) {
+                tamagotchi.openAI.setApiKey(apiKey);
+                tamagotchi.log("OpenAI API key configured!");
+                document.getElementById('set-key-btn').textContent = "Key Set ✓";
+                document.getElementById('set-key-btn').disabled = true;
+            }
+        }
+    </script>
+</body>
+</html>
